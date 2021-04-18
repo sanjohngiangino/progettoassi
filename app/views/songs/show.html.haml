@@ -1,0 +1,19 @@
+%h1 Details about the song #{@song.title}
+
+%ul#details
+	%li
+		Artist:
+		= @song.artist
+	%li
+		Album:
+		= @song.album
+	%li
+		Genre:
+		= @song.genre
+	%li
+		Release date:
+		= @song.release_date
+#{link_to 'Back to song list',songs_path}
+%br
+#{link_to 'Delete',song_path(@song), :method => :delete}
+#{link_to 'Edit Info',edit_song_path(@song)}
