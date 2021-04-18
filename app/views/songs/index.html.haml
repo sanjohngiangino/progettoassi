@@ -1,0 +1,20 @@
+%h1 All songs
+
+%table#songs
+ %thead
+  %tr
+   %th Song Title
+   %th Artist
+   %th Album
+   %th Genre
+   %th Release Date
+   %th More info
+ %tbody
+  -@all.each do |song|
+   %tr
+    %td= song.title
+    %td= song.artist
+    %td= song.album
+    %td= song.genre
+    %td= link_to "Details", song_path(song)
+ #{link_to 'Add new song', new_song_path}

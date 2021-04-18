@@ -1,0 +1,5 @@
+%h1 Create a new song
+
+= form_tag songs_path , :method => :post do
+	= render :partial => 'song_form'
+	= submit_tag 'Save Changes'

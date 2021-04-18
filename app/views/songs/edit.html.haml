@@ -1,0 +1,7 @@
+%h2 Edit Song
+
+= form_tag song_path(@song), :method => :put do
+
+  = render :partial => 'song_form'
+  
+  = submit_tag 'Save Changes'
