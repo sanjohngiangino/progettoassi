@@ -126,3 +126,11 @@ end
 
 cmd => rails db:prepare test
 cmd => rails g cucumber:install
+
+Cucumber => modificare gems bundle install,file da john "features"
+
+LOGIN
+
+=>comandi slides e file da john
+
+
