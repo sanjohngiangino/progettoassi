@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Orangelyrics</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+  
+  <nav class="navbar sticky-top" style="background-color: #FF4F00 ; " id="home">
+
+  <a class="navbar-brand" href="../songs">
+  <img id="drag1" src="<%= asset_path('logo_large.png') %>" draggable="true" ondragstart="drag(event)" width="336" height="69">
+        </a>
+  
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+  <ul>
+    <li><a href="../songs">Canzoni</a></li>
+    <li><a href="../playlists">Playlist</a></li>
+    <% if user_signed_in? %>
+    <li>   <%= link_to 'Logout', 
+    destroy_user_session_path, :method => :delete%>
+    </li>
+    <% end %>
+    
+    </ul>	
+    </nav>
+  
+    <%= yield %>
+
+    <% if user_signed_in? %>
+
+
+Logged in as <%= current_user.email%> [<%= link_to 'Logout', 
+destroy_user_session_path, :method => :delete%>]
+<% end %>
+
+
+
+<% if not current_user.nil? %> 
+<hr>
+<b>Roles : </b> 
+<% if current_user.is_editor? and not  current_user.is_admin? %>
+Editor
+<%end %>
+<% if current_user.is_iscritto? and not  current_user.is_admin? %>
+Iscritto
+<%end %>
+<% if current_user.is_admin? %>
+ <%= link_to "Admin", admin_view_path %>
+<%end %>
+
+
+<% end  %>
+
+<% if not flash.empty? %> 
+<hr>
+<h3>Notifications:</h3>
+<% flash.each do |type, msg| %>
+  <div>
+    <%= msg %>
+  </div>
+<% end %>
+<% end %>
+  </body>
+</html>

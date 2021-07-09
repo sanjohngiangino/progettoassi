@@ -1,0 +1,90 @@
+<p id="notice"><%= notice %></p>
+
+
+    <% if @playlists.count >1 %>
+    <h1> Playlist </h1>
+    <br>
+    <h3> Lista delle Playlist:  </h3> 
+       
+    <div class="container">
+    <div class="row">
+    <% @playlists.each do |playlist| %>
+      <div class= "col-md-4">
+          <div class ="card mt-3">
+            <div class="card-header">
+  
+             <center> <h3><%=playlist.name%></h3></center>
+            </div>
+  
+            <center><div class="card-body" >
+             <td>Descrizione: <%= playlist.content %></td><br>
+           
+             <br>
+             <td>Ultima modifica da : <%= User.find(playlist.user_id).email %></td><br>
+              <br>
+              <%=link_to playlist.name ,playlists_path(:play => playlist.id), class: 'btn btn-primary',style: "background-color: #FF4F00" %>
+            </div></center>
+            <td>
+            <% if can? :destroy, Playlist %>
+              <%= link_to 'Destroy', playlist, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <%end%>
+              </div>
+        </div>
+   
+    <%end%>
+    </div>
+    </div>
+    <br>
+    <% if can? :create, Song %>
+    <%= link_to 'Crea una nuova playlist', new_playlist_path %>
+    <%end%>
+    <%end%>
+    <% if @playlists.count ==1 %>
+    <% @playlists.each do |playlist| %> <h1 style="color: #FF4F00"><%=playlist.name  %> </h1> <br> <h4>Descrizione: </h4> <p> <%=playlist.content %> <%= link_to 'Modifica descrizione', edit_playlist_path(playlist.id) %>
+      
+      <br>Ultima modifica da: <%= User.find(playlist.user_id).email %>
+      <%end%>
+    
+      <br>
+    <h3> Lista delle canzoni:  </h3>
+
+    
+   
+    <div class="container">
+    <div class="row">
+      <% @songs.each do |song| %>
+        <div class= "col-md-4">
+          <div class ="card mt-3">
+            <div class="card-header">
+  
+             <center> <h3><%=song.title%></h3></center>
+            </div>
+  
+            <center><div class="card-body" >
+             <td>Artist: <%= song.artist %></td><br>
+             <td>Genre: <%= song.genre %></td><br>
+             <td>Year: <%= song.year %></td><br>
+             <br>
+             <td>Ultima modifica da : <%= User.find(song.user_id).email %></td><br>
+              <br>
+              <%=link_to "Lyrics", song_path(song.id),class: 'btn btn-primary' %>
+            </div></center>
+            <td>
+            <% if can? :destroy, Song %>
+            <%= link_to 'Destroy', song, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <%end%>
+            </div>
+        </div>
+        <%end%>
+  
+        
+  
+    </div>
+  
+  </div>
+    <%end%>
+    
+
+
+
+<br>

@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Lista di tutte le canzoni</h1>
+<br>
+
+<div class="container">
+  <div class="row">
+    <% @songs.each do |song| %>
+      <div class= "col-md-4">
+        <div class ="card mt-3">
+          <div class="card-header">
+
+           <center> <h3><%=song.title%></h3></center>
+          </div>
+
+          <center><div class="card-body" >
+           <td>Artist: <%= song.artist %></td><br>
+           <td>Genre: <%= song.genre %></td><br>
+           <td>Year: <%= song.year %></td><br>
+           <br>
+           <td>Ultima modifica da : <%= User.find(song.user_id).email %></td><br>
+            <br>
+            <%=link_to "Lyrics", song_path(song.id),class: 'btn btn-primary' %>
+          </div></center>
+          <% if can? :destroy, Song %>
+          <td><%= link_to 'Destroy', song, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <%end%>
+          </div>
+      </div>
+      <%end%>
+
+      
+
+  </div>
+
+
+
+</div>
+<br>
+<br>
+<br>
+<% if can? :create, Song %>
+<%= link_to 'Crea una nuova canzone', new_song_path %>
+<%end%>
