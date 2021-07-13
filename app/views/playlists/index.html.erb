@@ -1,46 +1,42 @@
-<p id="notice"><%= notice %></p>
-
-
     <% if @playlists.count >1 %>
-    <h1> Playlist </h1>
-    <br>
-    <h3> Lista delle Playlist:  </h3> 
+<br>
+
+    <center><h2> Lista delle Playlist:</h2> </center>
        
-    <div class="container">
+    <center><div class="container">
     <div class="row">
     <% @playlists.each do |playlist| %>
       <div class= "col-md-4">
-          <div class ="card mt-3">
-            <div class="card-header">
+          <div class ="card mt-3" style= "background-color: #FF4F00">
+               <%=link_to playlist.name ,playlists_path(:play => playlist.id), class: 'btn', style: 'color: white'%>
   
-             <center> <h3><%=playlist.name%></h3></center>
-            </div>
-  
-            <center><div class="card-body" >
-             <td>Descrizione: <%= playlist.content %></td><br>
-           
+            <center><div class="card-body" style= "background-color: #FFFFFF">
+             <td>Descrizione: <%= playlist.content %></td>
              <br>
-             <td>Ultima modifica da : <%= User.find(playlist.user_id).email %></td><br>
+             <td>Ultima modifica da : <%= User.find(playlist.user_id).email %></td>
               <br>
-              <%=link_to playlist.name ,playlists_path(:play => playlist.id), class: 'btn btn-primary',style: "background-color: #FF4F00" %>
             </div></center>
             <td>
             <% if can? :destroy, Playlist %>
-              <%= link_to 'Destroy', playlist, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              <%= link_to 'Destroy', playlist, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
             <%end%>
               </div>
         </div>
    
     <%end%>
     </div>
-    </div>
+    </div></center>
+
     <br>
-    <% if can? :create, Song %>
-    <%= link_to 'Crea una nuova playlist', new_playlist_path %>
+        <br>
+            <br>
+
+    <div class= "justify-content-center">
     <%end%>
-    <%end%>
+    </div>
     <% if @playlists.count ==1 %>
-    <% @playlists.each do |playlist| %> <h1 style="color: #FF4F00"><%=playlist.name  %> </h1> <br> <h4>Descrizione: </h4> <p> <%=playlist.content %> <%= link_to 'Modifica descrizione', edit_playlist_path(playlist.id) %>
+    <% @playlists.each do |playlist| %> <h1 style="color: #FF4F00"><%=playlist.name  %> </h1> <br> <h4>Descrizione: </h4> 
+    <p> <%=playlist.content %> <%= link_to 'Modifica descrizione', edit_playlist_path(playlist.id) %>
       
       <br>Ultima modifica da: <%= User.find(playlist.user_id).email %>
       <%end%>
@@ -67,11 +63,11 @@
              <br>
              <td>Ultima modifica da : <%= User.find(song.user_id).email %></td><br>
               <br>
-              <%=link_to "Lyrics", song_path(song.id),class: 'btn btn-primary' %>
+              <%=link_to "Lyrics", song_path(song.id),class: 'btn btn-primary', style: "background-color: #FF4F00" %>
             </div></center>
             <td>
             <% if can? :destroy, Song %>
-            <%= link_to 'Destroy', song, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <%= link_to 'Destroy', song, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
             <%end%>
             </div>
         </div>
@@ -83,8 +79,12 @@
   
   </div>
     <%end%>
-    
-
+    <center><div class = "container justify-content-center">
+    <br>
+<% if can? :create, Song %>
+    <%= link_to 'Crea una nuova playlist', new_playlist_path, class: 'btn btn-success'%>
+    <%end%>
+    </div></center>
 
 
 <br>

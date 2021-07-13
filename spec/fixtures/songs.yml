@@ -1,0 +1,28 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one_sg:
+  title: Losing My Religion 
+  artist: R.E.M.
+  year: 1991
+  genre: Rock
+  lyric: Oh life is bigger...
+  playlist: one
+  user: one_use
+
+two_sg:
+  title: Smell like teen spirit
+  artist: Nirvana
+  year: 1991
+  genre: Rock
+  lyric: Load up on guns, bring your friends...
+  playlist: two
+  user: one_use
+
+three_sg:
+  title: Wind of Change
+  artist: Scorpions
+  year: 1990
+  genre: Power ballad
+  lyric: Follow the Moskva...
+  playlist: one
+  user: one_use

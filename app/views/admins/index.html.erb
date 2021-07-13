@@ -1,6 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Orangelyrics</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+  
+  <nav class="navbar sticky-top" style="background-color: #FF4F00 ; " id="home">
+
+  <a class="navbar-brand" href="../songs">
+  <img id="drag1" src="<%= asset_path('logo_large.png') %>" draggable="true" ondragstart="drag(event)" width="336" height="69">
+        </a>
+  
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+  <ul>
+    <li><a href="../songs">Canzoni</a></li>
+    <li><a href="../playlists">Playlist</a></li>
+    <% if user_signed_in? %>
+    <li>   <%= link_to 'Logout', 
+    destroy_user_session_path, :method => :delete%>
+    </li>
+    <% end %>
+    
+    </ul>	
+    </nav>
+    <%= yield %>
+  </body>
+</html>
+
+<center><div class = "container">
+<br>
+<h3>Lista degli utenti:</h3>
+<br>
  <style>
 table, th, td {
-  border: 1px solid black;
+  border: 1px solid black; padding: 3px;
 }
 </style>
 <table>
@@ -51,3 +93,39 @@ table, th, td {
 <% end %>
 
 </table>
+<br>
+<%= link_to 'Back', songs_path, class: 'btn btn-secondary' %>
+</div></center>
+<br>
+
+<div class="text-center" style="background-color: rgba(0, 0, 0, 0.05)">
+ <% if user_signed_in? %>
+
+
+Logged in as <%= current_user.email%> [<%= link_to 'Logout', 
+destroy_user_session_path, :method => :delete%>]
+<% end %>
+<br>
+<% if not current_user.nil? %> 
+<b>Roles : </b> 
+<% if current_user.is_editor? and not  current_user.is_admin? %>
+Editor
+<%end %>
+<% if current_user.is_iscritto? and not  current_user.is_admin? %>
+Iscritto
+<%end %>
+<% if current_user.is_admin? %>
+ <%= link_to "Admin", admin_view_path %>
+<%end %>
+
+<% end  %>
+  <% if not flash.empty? %> 
+<p>Notifications:
+<% flash.each do |type, msg| %>     <%= msg %>
+</p>
+<br>
+<% end %>
+<% end %>
+
+  </div>
+</footer>

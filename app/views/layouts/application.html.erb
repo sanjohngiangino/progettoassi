@@ -32,20 +32,23 @@
     
     </ul>	
     </nav>
-  
+
+    
+
+
     <%= yield %>
 
-    <% if user_signed_in? %>
+   
+
+<div class="text-center" style="background-color: rgba(0, 0, 0, 0.05)">
+ <% if user_signed_in? %>
 
 
 Logged in as <%= current_user.email%> [<%= link_to 'Logout', 
 destroy_user_session_path, :method => :delete%>]
 <% end %>
-
-
-
+<br>
 <% if not current_user.nil? %> 
-<hr>
 <b>Roles : </b> 
 <% if current_user.is_editor? and not  current_user.is_admin? %>
 Editor
@@ -57,17 +60,17 @@ Iscritto
  <%= link_to "Admin", admin_view_path %>
 <%end %>
 
-
 <% end  %>
-
-<% if not flash.empty? %> 
-<hr>
-<h3>Notifications:</h3>
-<% flash.each do |type, msg| %>
-  <div>
-    <%= msg %>
-  </div>
+  <% if not flash.empty? %> 
+<p>Notifications:
+<% flash.each do |type, msg| %>     <%= msg %>
+</p>
+<br>
 <% end %>
 <% end %>
   </body>
 </html>
+  </div>
+</footer>
+
+

@@ -1,7 +1,6 @@
-<p id="notice"><%= notice %></p>
 
-<h1>Lista di tutte le canzoni</h1>
 <br>
+<center><h2>Lista di tutte le canzoni</h2></center>
 
 <div class="container">
   <div class="row">
@@ -10,7 +9,7 @@
         <div class ="card mt-3">
           <div class="card-header">
 
-           <center> <h3><%=song.title%></h3></center>
+           <center> <h5><%=song.title%></h5></center>
           </div>
 
           <center><div class="card-body" >
@@ -20,10 +19,10 @@
            <br>
            <td>Ultima modifica da : <%= User.find(song.user_id).email %></td><br>
             <br>
-            <%=link_to "Lyrics", song_path(song.id),class: 'btn btn-primary' %>
+            <%=link_to "Lyrics", song_path(song.id),class: 'btn btn-primary', style: "background-color: #FF4F00" %>
           </div></center>
           <% if can? :destroy, Song %>
-          <td><%= link_to 'Destroy', song, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'Destroy', song, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
           <%end%>
           </div>
       </div>
@@ -36,9 +35,12 @@
 
 
 </div>
-<br>
-<br>
+
+<center><div>
 <br>
 <% if can? :create, Song %>
-<%= link_to 'Crea una nuova canzone', new_song_path %>
+<%= link_to 'Crea una nuova canzone', new_song_path, class: 'btn btn-success' %>
 <%end%>
+<br>
+<br>
+</div></center>

@@ -1,34 +1,28 @@
-<div class ="container-fluid">
- <h1> Playlist: <%= @song.playlist.name%></h1>
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Title:</strong>
-  <%= @song.title %>
-</p>
+<div class ="container text-center">
+ <br>
+<h3>
+  <strong><%= @song.title %></strong>
+  
+</h3>
 
 <p>
   <strong>Artist:</strong>
   <%= @song.artist %>
-</p>
-
-<p>
+<br>
   <strong>Year:</strong>
   <%= @song.year %>
-</p>
-
-<p>
+<br>
   <strong>Genre:</strong>
   <%= @song.genre %>
-</p>
-
+<br>
+ <strong>Playlist:</strong> <%= @song.playlist.name%></p>
 <p>
-  <strong>Lyric:</strong>
+  <strong>Lyrics:</strong>
   <%= simple_format(@song.lyric) %>
 </p>
 <% if can? :edit, Song %>
-<%= link_to 'Edit', edit_song_path(@song) %> |
+<%= link_to 'Edit', edit_song_path(@song), class: 'btn btn-primary' %> |
 <%end%>
-<%= link_to 'Back', songs_path %>
-
+<%= link_to 'Back', songs_path, class: 'btn btn-secondary' %>
 </div>
+<br>
